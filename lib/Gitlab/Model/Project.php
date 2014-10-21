@@ -225,6 +225,22 @@ class Project extends AbstractModel
 
         return $branch->unprotect();
     }
+	
+    public function createBranch($branch_name, $ref)
+    {
+        $branch = new Branch($this, $branch_name);
+        $branch->setClient($this->getClient());
+
+        return $branch->create($ref);
+    }
+
+    public function deleteBranch($branch_name)
+    {
+        $branch = new Branch($this, $branch_name);
+        $branch->setClient($this->getClient());
+
+        return $branch->delete();
+    }
 
     public function tags()
     {

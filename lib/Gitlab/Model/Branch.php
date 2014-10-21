@@ -40,6 +40,20 @@ class Branch extends AbstractModel
         return Branch::fromArray($this->getClient(), $this->project, $data);
     }
 
+    public function create($ref)
+    {
+        $data = $this->api('repositories')->createBranch($this->project->id, $this->name, $ref);
+
+        return Branch::fromArray($this->getClient(), $this->project, $data);
+    }
+
+    public function delete()
+    {
+        $data = $this->api('repositories')->deleteBranch($this->project->id, $this->name);
+
+        return Branch::fromArray($this->getClient(), $this->project, $data);
+    }
+
     public function protect()
     {
         $data = $this->api('repositories')->protectBranch($this->project->id, $this->name);

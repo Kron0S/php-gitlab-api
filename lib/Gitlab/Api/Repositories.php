@@ -50,6 +50,20 @@ class Repositories extends AbstractApi
         return $this->get('projects/'.urlencode($project_id).'/repository/tree', $params);
     }
 
+    public function createBranch($project_id, $branch_name, $ref)
+    {
+        return $this->put('projects/'.urlencode($project_id).'/repository/branches/create', array(
+			'id' => $project_id,
+			'branch_name' => $branch_name,
+			'ref' => $ref,
+		));
+    }
+
+    public function deleteBranch($project_id, $branch)
+    {
+        return $this->delete('projects/'.urlencode($project_id).'/repository/branches/'.urlencode($branch));
+    }
+
     public function protectBranch($project_id, $branch_id)
     {
         return $this->put('projects/'.urlencode($project_id).'/repository/branches/'.urlencode($branch_id).'/protect');
